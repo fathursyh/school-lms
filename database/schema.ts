@@ -157,6 +157,23 @@ export class MaterialSchema extends BaseModel {
   declare updatedAt: DateTime | null
 }
 
+export class RememberMeTokenSchema extends BaseModel {
+  static $columns = ['createdAt', 'expiresAt', 'hash', 'id', 'tokenableId', 'updatedAt'] as const
+  $columns = RememberMeTokenSchema.$columns
+  @column.dateTime({ autoCreate: true })
+  declare createdAt: DateTime
+  @column.dateTime()
+  declare expiresAt: DateTime
+  @column()
+  declare hash: string
+  @column({ isPrimary: true })
+  declare id: number
+  @column()
+  declare tokenableId: string
+  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  declare updatedAt: DateTime
+}
+
 export class SubjectSchema extends BaseModel {
   static $columns = ['code', 'createdAt', 'id', 'name', 'updatedAt'] as const
   $columns = SubjectSchema.$columns

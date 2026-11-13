@@ -11,14 +11,14 @@ export default function FlashToasts() {
   }, [])
 
   useEffect(() => {
+
     if (flash.error) toast.error(flash.error, { id: 'flash' })
     if (flash.success) toast.success(flash.success, { id: 'flash' })
   }, [flash])
 
   return (
     <Toaster
-      position="top-center"
-      toastOptions={{ unstyled: true }}
+      position="bottom-right"
       icons={{
         success: <CircleCheck size={18} strokeWidth={1.8} />,
         error: <CircleAlert size={18} strokeWidth={1.8} />,

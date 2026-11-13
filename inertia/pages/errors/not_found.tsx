@@ -1,4 +1,3 @@
-import MarketingLayout from '~/layouts/marketing'
 
 export default function NotFound() {
   return (
@@ -20,5 +19,3 @@ export default function NotFound() {
     </div>
   )
 }
-
-NotFound.layout = [MarketingLayout]

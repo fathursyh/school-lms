@@ -1,6 +1,5 @@
 import { Link } from '@adonisjs/inertia/react'
 import { buttonVariants } from '~/components/ui/button'
-import AppLayout from '~/layouts/app'
 
 export default function Home() {
   return (
@@ -9,5 +8,3 @@ export default function Home() {
     </>
   )
 }
-
-Home.layout = [AppLayout]

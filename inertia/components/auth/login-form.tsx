@@ -1,4 +1,3 @@
-import { cn } from "~/lib/utils"
 import { Button } from "@/components/ui/button"
 import {
   Card,
@@ -9,7 +8,6 @@ import {
 } from "@/components/ui/card"
 import {
   Field,
-  FieldDescription,
   FieldError,
   FieldGroup,
   FieldLabel,
@@ -20,13 +18,9 @@ import { Spinner } from "~/components/ui/spinner"
 import { Checkbox } from "~/components/ui/checkbox"
 import { Label } from "~/components/ui/label"
 
-export function LoginForm({
-  className,
-  ...props
-}: React.ComponentProps<"div">) {
+export function LoginForm() {
   return (
-    <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
+      <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle>Login to your account</CardTitle>
           <CardDescription>
@@ -43,8 +37,9 @@ export function LoginForm({
                     id="email"
                     name="email"
                     type="email"
-                    placeholder="m@example.com"
+                    placeholder="email@school.edu.com"
                     required
+                    autoFocus
                   />
                   {errors.email && <FieldError>{errors.email}</FieldError>}
                 </Field>
@@ -75,15 +70,11 @@ export function LoginForm({
                     <Spinner className={!processing ? 'hidden' : ''} aria-hidden={!processing} />
                     {processing ? 'One moment…' : 'Sign in'}
                   </Button>
-                  <FieldDescription className="text-center">
-                    Don&apos;t have an account? <a href="#">Sign up</a>
-                  </FieldDescription>
                 </Field>
               </FieldGroup>
             )}
           </Form>
         </CardContent>
       </Card>
-    </div>
   )
 }

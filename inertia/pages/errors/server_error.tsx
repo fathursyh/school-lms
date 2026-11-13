@@ -1,5 +1,3 @@
-import MarketingLayout from '~/layouts/marketing'
-
 export default function ServerError() {
   return (
     <div className="home">
@@ -21,5 +19,3 @@ export default function ServerError() {
     </div>
   )
 }
-
-ServerError.layout = [MarketingLayout]

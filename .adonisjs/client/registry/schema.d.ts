@@ -29,22 +29,22 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/new_account_controller').default['create']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/new_account_controller').default['create']>>>
-      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/new_account_controller').default['create']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/auth/new_account_controller').default['create']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/new_account_controller').default['create']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/auth/new_account_controller').default['create']>>>
     }
   }
   'new_account.store': {
     methods: ["POST"]
     pattern: '/signup'
     types: {
-      body: ExtractBody<InferInput<(typeof import('#validators/user').signupValidator)>>
+      body: ExtractBody<InferInput<(typeof import('#validators/auth_validator').signupValidator)>>
       paramsTuple: []
       params: {}
-      query: ExtractQuery<InferInput<(typeof import('#validators/user').signupValidator)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/new_account_controller').default['store']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/new_account_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
-      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/new_account_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
+      query: ExtractQuery<InferInput<(typeof import('#validators/auth_validator').signupValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/auth/new_account_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/new_account_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/auth/new_account_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'session.create': {
@@ -55,22 +55,22 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/session_controller').default['create']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/session_controller').default['create']>>>
-      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/session_controller').default['create']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/auth/session_controller').default['create']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/session_controller').default['create']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/auth/session_controller').default['create']>>>
     }
   }
   'session.store': {
     methods: ["POST"]
     pattern: '/login'
     types: {
-      body: ExtractBody<InferInput<(typeof import('#validators/user').loginValidator)>>
+      body: ExtractBody<InferInput<(typeof import('#validators/auth_validator').loginValidator)>>
       paramsTuple: []
       params: {}
-      query: ExtractQuery<InferInput<(typeof import('#validators/user').loginValidator)>>
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/session_controller').default['store']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/session_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
-      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/session_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
+      query: ExtractQuery<InferInput<(typeof import('#validators/auth_validator').loginValidator)>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/auth/session_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/session_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/auth/session_controller').default['store']>>> | { status: 422; response: { errors: SimpleError[] } }
     }
   }
   'session.destroy': {
@@ -81,9 +81,126 @@ export interface Registry {
       paramsTuple: []
       params: {}
       query: {}
-      response: ExtractResponse<Awaited<ReturnType<import('#controllers/session_controller').default['destroy']>>>
-      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/session_controller').default['destroy']>>>
-      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/session_controller').default['destroy']>>>
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/auth/session_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/auth/session_controller').default['destroy']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/auth/session_controller').default['destroy']>>>
+    }
+  }
+  'public.extracurriculars.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/extracurriculars'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/extracurricular/public_extracurriculars_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/extracurricular/public_extracurriculars_controller').default['index']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/extracurricular/public_extracurriculars_controller').default['index']>>>
+    }
+  }
+  'students.overview': {
+    methods: ["GET","HEAD"]
+    pattern: '/students/overview'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/students_general_controller').default['overview']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/students_general_controller').default['overview']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/students_general_controller').default['overview']>>>
+    }
+  }
+  'administrator.extracurriculars.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/administrator/extracurriculars'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['index']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['index']>>>
+    }
+  }
+  'administrator.extracurriculars.create': {
+    methods: ["GET","HEAD"]
+    pattern: '/administrator/extracurriculars/create'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['create']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['create']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['create']>>>
+    }
+  }
+  'administrator.extracurriculars.store': {
+    methods: ["POST"]
+    pattern: '/administrator/extracurriculars'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['store']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['store']>>>
+    }
+  }
+  'administrator.extracurriculars.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/administrator/extracurriculars/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['show']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['show']>>>
+    }
+  }
+  'administrator.extracurriculars.edit': {
+    methods: ["GET","HEAD"]
+    pattern: '/administrator/extracurriculars/:id/edit'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['edit']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['edit']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['edit']>>>
+    }
+  }
+  'administrator.extracurriculars.update': {
+    methods: ["PUT","PATCH"]
+    pattern: '/administrator/extracurriculars/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['update']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['update']>>>
+    }
+  }
+  'administrator.extracurriculars.destroy': {
+    methods: ["DELETE"]
+    pattern: '/administrator/extracurriculars/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['destroy']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['destroy']>>>
     }
   }
 }

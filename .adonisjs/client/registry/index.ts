@@ -44,6 +44,60 @@ const routes = {
     tokens: [[0,"logout"]],
     types: placeholder as Registry['session.destroy']['types'],
   },
+  'public.extracurriculars.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/extracurriculars',
+    tokens: [[0,"extracurriculars"]],
+    types: placeholder as Registry['public.extracurriculars.index']['types'],
+  },
+  'students.overview': {
+    methods: ["GET","HEAD"],
+    pattern: '/students/overview',
+    tokens: [[0,"students"],[0,"overview"]],
+    types: placeholder as Registry['students.overview']['types'],
+  },
+  'administrator.extracurriculars.index': {
+    methods: ["GET","HEAD"],
+    pattern: '/administrator/extracurriculars',
+    tokens: [[0,"administrator"],[0,"extracurriculars"]],
+    types: placeholder as Registry['administrator.extracurriculars.index']['types'],
+  },
+  'administrator.extracurriculars.create': {
+    methods: ["GET","HEAD"],
+    pattern: '/administrator/extracurriculars/create',
+    tokens: [[0,"administrator"],[0,"extracurriculars"],[0,"create"]],
+    types: placeholder as Registry['administrator.extracurriculars.create']['types'],
+  },
+  'administrator.extracurriculars.store': {
+    methods: ["POST"],
+    pattern: '/administrator/extracurriculars',
+    tokens: [[0,"administrator"],[0,"extracurriculars"]],
+    types: placeholder as Registry['administrator.extracurriculars.store']['types'],
+  },
+  'administrator.extracurriculars.show': {
+    methods: ["GET","HEAD"],
+    pattern: '/administrator/extracurriculars/:id',
+    tokens: [[0,"administrator"],[0,"extracurriculars"],[1,"id"]],
+    types: placeholder as Registry['administrator.extracurriculars.show']['types'],
+  },
+  'administrator.extracurriculars.edit': {
+    methods: ["GET","HEAD"],
+    pattern: '/administrator/extracurriculars/:id/edit',
+    tokens: [[0,"administrator"],[0,"extracurriculars"],[1,"id"],[0,"edit"]],
+    types: placeholder as Registry['administrator.extracurriculars.edit']['types'],
+  },
+  'administrator.extracurriculars.update': {
+    methods: ["PUT","PATCH"],
+    pattern: '/administrator/extracurriculars/:id',
+    tokens: [[0,"administrator"],[0,"extracurriculars"],[1,"id"]],
+    types: placeholder as Registry['administrator.extracurriculars.update']['types'],
+  },
+  'administrator.extracurriculars.destroy': {
+    methods: ["DELETE"],
+    pattern: '/administrator/extracurriculars/:id',
+    tokens: [[0,"administrator"],[0,"extracurriculars"],[1,"id"]],
+    types: placeholder as Registry['administrator.extracurriculars.destroy']['types'],
+  },
 } as const satisfies Record<string, AdonisEndpoint>
 
 export { routes }

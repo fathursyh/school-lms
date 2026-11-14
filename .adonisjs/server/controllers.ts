@@ -4,6 +4,13 @@
  */
 
 export const controllers = {
-  NewAccount: () => import('#controllers/new_account_controller'),
-  Session: () => import('#controllers/session_controller'),
+  auth: {
+    NewAccount: () => import('#controllers/auth/new_account_controller'),
+    Session: () => import('#controllers/auth/session_controller'),
+  },
+  extracurricular: {
+    AdminExtracurriculars: () => import('#controllers/extracurricular/admin_extracurriculars_controller'),
+    PublicExtracurriculars: () => import('#controllers/extracurricular/public_extracurriculars_controller'),
+  },
+  StudentsGeneral: () => import('#controllers/students_general_controller'),
 }

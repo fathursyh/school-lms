@@ -54,7 +54,7 @@ export default function Login() {
           <SchoolPrograms />
         </aside>
         <img
-          src="https://bic.id/artikel/wp-content/uploads/2025/07/pemandangan-kampus-sma-berasrama-terbaik-di-indonesia-scaled.webp"
+          src="/school.webp"
           className="w-full object-cover h-full absolute -z-20"
           alt="Login side illustration"
         />
@@ -92,14 +92,14 @@ const programs = [
     icon: '🎓',
     title: 'Alumni Portal',
     description: 'Stay connected with graduates.',
-    route: 'home',
+    route: 'students.overview',
   },
   { icon: '📚', title: 'E-Library', description: 'Browse books and journals.', route: 'home' },
   {
     icon: '🏆',
     title: 'Extracurricular',
     description: 'Clubs, sports, and events.',
-    route: 'home',
+    route: 'public.extracurriculars.index',
   },
   { icon: '💼', title: 'Career Center', description: 'Internships and guidance.', route: 'home' },
 ] satisfies ProgramsList[]

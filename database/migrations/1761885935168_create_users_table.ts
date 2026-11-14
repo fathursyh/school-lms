@@ -1,5 +1,8 @@
 import { BaseSchema } from '@adonisjs/lucid/schema'
 
+const userRole = ['ADMIN', 'TEACHER', 'STUDENT'] as const;
+export type UserRole = typeof userRole[number]
+
 export default class extends BaseSchema {
   protected tableName = 'users'
 
@@ -10,8 +13,7 @@ export default class extends BaseSchema {
       table.string('email', 254).notNullable().unique()
       table.string('name').notNullable()
       table.string('password').notNullable()
-      table.enum('role', ['ADMIN', 'TEACHER', 'STUDENT']).notNullable()
-
+      table.enum('role', userRole).defaultTo('STUDENT' satisfies UserRole)
       table.timestamp('created_at').notNullable()
       table.timestamp('updated_at').nullable()
     })

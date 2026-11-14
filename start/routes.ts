@@ -1,21 +1,31 @@
-import { middleware } from '#start/kernel'
-import { controllers } from '#generated/controllers'
 import router from '@adonisjs/core/services/router'
+import PublicExtracurricularsRoutes from './routes/extracurriculars/public_extracurriculars_routes.ts'
+import AuthRoutes from './routes/auth/auth_routes.ts'
+import { middleware } from './kernel.ts'
+import AdminExtracurricularsRoutes from './routes/extracurriculars/admin_extracurriculars_routes.ts'
+import StudentsGeneralRoutes from './routes/students_general_routes.ts'
 
 router.on('/').redirect('session.create').as('home')
 
-router
-  .group(() => {
-    router.get('signup', [controllers.NewAccount, 'create'])
-    router.post('signup', [controllers.NewAccount, 'store'])
+AuthRoutes()
 
-    router.get('login', [controllers.Session, 'create'])
-    router.post('login', [controllers.Session, 'store'])
-  })
-  .use(middleware.guest())
+router.group(() => {
+  PublicExtracurricularsRoutes()
+})
+.as('public')
 
-router
-  .group(() => {
-    router.post('logout', [controllers.Session, 'destroy'])
-  })
+router.group(() => {
+  StudentsGeneralRoutes()
+})
+  .prefix('students')
+  .as('students')
   .use(middleware.auth())
+  .use(middleware.role(['STUDENT']))
+
+router.group(() => {
+  AdminExtracurricularsRoutes()
+})
+  .prefix('administrator')
+  .as('administrator')
+  .use(middleware.auth())
+  .use(middleware.role(['ADMIN']))

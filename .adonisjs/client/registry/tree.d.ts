@@ -12,4 +12,23 @@ export interface ApiDefinition {
     store: typeof routes['session.store']
     destroy: typeof routes['session.destroy']
   }
+  public: {
+    extracurriculars: {
+      index: typeof routes['public.extracurriculars.index']
+    }
+  }
+  students: {
+    overview: typeof routes['students.overview']
+  }
+  administrator: {
+    extracurriculars: {
+      index: typeof routes['administrator.extracurriculars.index']
+      create: typeof routes['administrator.extracurriculars.create']
+      store: typeof routes['administrator.extracurriculars.store']
+      show: typeof routes['administrator.extracurriculars.show']
+      edit: typeof routes['administrator.extracurriculars.edit']
+      update: typeof routes['administrator.extracurriculars.update']
+      destroy: typeof routes['administrator.extracurriculars.destroy']
+    }
+  }
 }

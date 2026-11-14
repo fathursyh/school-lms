@@ -4,7 +4,9 @@ export default class AdminExtracurricularsController {
   /**
    * Display a list of resource
    */
-  async index({}: HttpContext) {}
+  async index({inertia}: HttpContext) {
+    return inertia.render('_protected/administrators/extracurriculars/index', {})
+  }
 
   /**
    * Display form to create a new record

@@ -112,9 +112,217 @@ export interface Registry {
       rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/students_general_controller').default['overview']>>>
     }
   }
-  'administrator.extracurriculars.index': {
+  'teachers.overview': {
     methods: ["GET","HEAD"]
-    pattern: '/administrator/extracurriculars'
+    pattern: '/teachers/overview'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/teachers_general_controller').default['overview']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/teachers_general_controller').default['overview']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/teachers_general_controller').default['overview']>>>
+    }
+  }
+  'administrators.overview': {
+    methods: ["GET","HEAD"]
+    pattern: '/administrators/overview'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/admin_general_controller').default['overview']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/admin_general_controller').default['overview']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/admin_general_controller').default['overview']>>>
+    }
+  }
+  'administrators.academic_years.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/administrators/academic_years'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['index']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['index']>>>
+    }
+  }
+  'administrators.academic_years.create': {
+    methods: ["GET","HEAD"]
+    pattern: '/administrators/academic_years/create'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['create']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['create']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['create']>>>
+    }
+  }
+  'administrators.academic_years.store': {
+    methods: ["POST"]
+    pattern: '/administrators/academic_years'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['store']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['store']>>>
+    }
+  }
+  'administrators.academic_years.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/administrators/academic_years/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['show']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['show']>>>
+    }
+  }
+  'administrators.academic_years.edit': {
+    methods: ["GET","HEAD"]
+    pattern: '/administrators/academic_years/:id/edit'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['edit']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['edit']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['edit']>>>
+    }
+  }
+  'administrators.academic_years.update': {
+    methods: ["PUT","PATCH"]
+    pattern: '/administrators/academic_years/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['update']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['update']>>>
+    }
+  }
+  'administrators.academic_years.destroy': {
+    methods: ["DELETE"]
+    pattern: '/administrators/academic_years/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['destroy']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/academic_year/admin_academic_years_controller').default['destroy']>>>
+    }
+  }
+  'administrators.subjects.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/administrators/subjects'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['index']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['index']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['index']>>>
+    }
+  }
+  'administrators.subjects.create': {
+    methods: ["GET","HEAD"]
+    pattern: '/administrators/subjects/create'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['create']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['create']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['create']>>>
+    }
+  }
+  'administrators.subjects.store': {
+    methods: ["POST"]
+    pattern: '/administrators/subjects'
+    types: {
+      body: {}
+      paramsTuple: []
+      params: {}
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['store']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['store']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['store']>>>
+    }
+  }
+  'administrators.subjects.show': {
+    methods: ["GET","HEAD"]
+    pattern: '/administrators/subjects/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['show']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['show']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['show']>>>
+    }
+  }
+  'administrators.subjects.edit': {
+    methods: ["GET","HEAD"]
+    pattern: '/administrators/subjects/:id/edit'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['edit']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['edit']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['edit']>>>
+    }
+  }
+  'administrators.subjects.update': {
+    methods: ["PUT","PATCH"]
+    pattern: '/administrators/subjects/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['update']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['update']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['update']>>>
+    }
+  }
+  'administrators.subjects.destroy': {
+    methods: ["DELETE"]
+    pattern: '/administrators/subjects/:id'
+    types: {
+      body: {}
+      paramsTuple: [ParamValue]
+      params: { id: ParamValue }
+      query: {}
+      response: ExtractResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['destroy']>>>
+      errorResponse: ExtractErrorResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['destroy']>>>
+      rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/subjects/admin_subjects_controller').default['destroy']>>>
+    }
+  }
+  'administrators.extracurriculars.index': {
+    methods: ["GET","HEAD"]
+    pattern: '/administrators/extracurriculars'
     types: {
       body: {}
       paramsTuple: []
@@ -125,9 +333,9 @@ export interface Registry {
       rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['index']>>>
     }
   }
-  'administrator.extracurriculars.create': {
+  'administrators.extracurriculars.create': {
     methods: ["GET","HEAD"]
-    pattern: '/administrator/extracurriculars/create'
+    pattern: '/administrators/extracurriculars/create'
     types: {
       body: {}
       paramsTuple: []
@@ -138,9 +346,9 @@ export interface Registry {
       rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['create']>>>
     }
   }
-  'administrator.extracurriculars.store': {
+  'administrators.extracurriculars.store': {
     methods: ["POST"]
-    pattern: '/administrator/extracurriculars'
+    pattern: '/administrators/extracurriculars'
     types: {
       body: {}
       paramsTuple: []
@@ -151,9 +359,9 @@ export interface Registry {
       rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['store']>>>
     }
   }
-  'administrator.extracurriculars.show': {
+  'administrators.extracurriculars.show': {
     methods: ["GET","HEAD"]
-    pattern: '/administrator/extracurriculars/:id'
+    pattern: '/administrators/extracurriculars/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -164,9 +372,9 @@ export interface Registry {
       rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['show']>>>
     }
   }
-  'administrator.extracurriculars.edit': {
+  'administrators.extracurriculars.edit': {
     methods: ["GET","HEAD"]
-    pattern: '/administrator/extracurriculars/:id/edit'
+    pattern: '/administrators/extracurriculars/:id/edit'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -177,9 +385,9 @@ export interface Registry {
       rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['edit']>>>
     }
   }
-  'administrator.extracurriculars.update': {
+  'administrators.extracurriculars.update': {
     methods: ["PUT","PATCH"]
-    pattern: '/administrator/extracurriculars/:id'
+    pattern: '/administrators/extracurriculars/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]
@@ -190,9 +398,9 @@ export interface Registry {
       rawResponse: ExtractRawResponse<Awaited<ReturnType<import('#controllers/extracurricular/admin_extracurriculars_controller').default['update']>>>
     }
   }
-  'administrator.extracurriculars.destroy': {
+  'administrators.extracurriculars.destroy': {
     methods: ["DELETE"]
-    pattern: '/administrator/extracurriculars/:id'
+    pattern: '/administrators/extracurriculars/:id'
     types: {
       body: {}
       paramsTuple: [ParamValue]

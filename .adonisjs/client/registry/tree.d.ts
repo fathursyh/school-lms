@@ -20,15 +20,37 @@ export interface ApiDefinition {
   students: {
     overview: typeof routes['students.overview']
   }
-  administrator: {
+  teachers: {
+    overview: typeof routes['teachers.overview']
+  }
+  administrators: {
+    overview: typeof routes['administrators.overview']
+    academicYears: {
+      index: typeof routes['administrators.academic_years.index']
+      create: typeof routes['administrators.academic_years.create']
+      store: typeof routes['administrators.academic_years.store']
+      show: typeof routes['administrators.academic_years.show']
+      edit: typeof routes['administrators.academic_years.edit']
+      update: typeof routes['administrators.academic_years.update']
+      destroy: typeof routes['administrators.academic_years.destroy']
+    }
+    subjects: {
+      index: typeof routes['administrators.subjects.index']
+      create: typeof routes['administrators.subjects.create']
+      store: typeof routes['administrators.subjects.store']
+      show: typeof routes['administrators.subjects.show']
+      edit: typeof routes['administrators.subjects.edit']
+      update: typeof routes['administrators.subjects.update']
+      destroy: typeof routes['administrators.subjects.destroy']
+    }
     extracurriculars: {
-      index: typeof routes['administrator.extracurriculars.index']
-      create: typeof routes['administrator.extracurriculars.create']
-      store: typeof routes['administrator.extracurriculars.store']
-      show: typeof routes['administrator.extracurriculars.show']
-      edit: typeof routes['administrator.extracurriculars.edit']
-      update: typeof routes['administrator.extracurriculars.update']
-      destroy: typeof routes['administrator.extracurriculars.destroy']
+      index: typeof routes['administrators.extracurriculars.index']
+      create: typeof routes['administrators.extracurriculars.create']
+      store: typeof routes['administrators.extracurriculars.store']
+      show: typeof routes['administrators.extracurriculars.show']
+      edit: typeof routes['administrators.extracurriculars.edit']
+      update: typeof routes['administrators.extracurriculars.update']
+      destroy: typeof routes['administrators.extracurriculars.destroy']
     }
   }
 }

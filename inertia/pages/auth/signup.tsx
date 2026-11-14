@@ -20,9 +20,9 @@ export default function Signup() {
                 className="field__input"
                 autoComplete="name"
                 placeholder="Ada Lovelace"
-                aria-invalid={errors.fullName ? 'true' : 'false'}
+                aria-invalid={errors.name ? 'true' : 'false'}
               />
-              {errors.fullName && <span className="field__error">{errors.fullName}</span>}
+              {errors.name && <span className="field__error">{errors.name}</span>}
             </div>
 
             <div className="field">

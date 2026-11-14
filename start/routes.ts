@@ -4,15 +4,18 @@ import AuthRoutes from './routes/auth/auth_routes.ts'
 import { middleware } from './kernel.ts'
 import AdminExtracurricularsRoutes from './routes/extracurriculars/admin_extracurriculars_routes.ts'
 import StudentsGeneralRoutes from './routes/students_general_routes.ts'
+import TeachersGeneralRoutes from './routes/teachers_general_routes.ts'
+import AdminGeneralRoutes from './routes/admin_general_routes.ts'
+import AdminAcademicYearsRoutes from './routes/academic_year/admin_academic_year_routes.ts'
+import AdminSubjectsRoutes from './routes/subjects/admin_subjects_routes.ts'
 
-router.on('/').redirect('session.create').as('home')
-
+router.on('/').renderInertia('home', {}).as('home')
 AuthRoutes()
 
 router.group(() => {
   PublicExtracurricularsRoutes()
 })
-.as('public')
+  .as('public')
 
 router.group(() => {
   StudentsGeneralRoutes()
@@ -23,9 +26,20 @@ router.group(() => {
   .use(middleware.role(['STUDENT']))
 
 router.group(() => {
+  TeachersGeneralRoutes()
+})
+  .prefix('teachers')
+  .as('teachers')
+  .use(middleware.auth())
+  .use(middleware.role(['TEACHER']))
+
+router.group(() => {
+  AdminGeneralRoutes()
+  AdminAcademicYearsRoutes()
+  AdminSubjectsRoutes()
   AdminExtracurricularsRoutes()
 })
-  .prefix('administrator')
-  .as('administrator')
-  .use(middleware.auth())
-  .use(middleware.role(['ADMIN']))
+  .prefix('administrators')
+  .as('administrators')
+  // .use(middleware.auth())
+  // .use(middleware.role(['ADMIN']))

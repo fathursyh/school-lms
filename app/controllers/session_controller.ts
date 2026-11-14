@@ -8,10 +8,10 @@ export default class SessionController {
   }
 
   async store({ request, auth, response }: HttpContext) {
-    const { email, password, remember_me } = await request.validateUsing(loginValidator)
+    const { email, password, rememberMe } = await request.validateUsing(loginValidator)
     const user = await User.verifyCredentials(email, password)
 
-    await auth.use('web').login(user, remember_me)
+    await auth.use('web').login(user, rememberMe)
     response.redirect().toRoute('home')
   }
 

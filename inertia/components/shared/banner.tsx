@@ -1,50 +1,48 @@
-"use client";
+'use client'
 
-import { X } from "lucide-react";
-import { useState } from "react";
-import { cn } from "~/lib/utils";
+import { X } from 'lucide-react'
+import { useState } from 'react'
+import { cn } from '~/lib/utils'
 
-import { Button } from "@/components/ui/button";
+import { Button } from '@/components/ui/button'
 interface Banner1Props {
-  title: string;
-  description: string;
-  linkText: string;
-  linkUrl: string;
-  defaultVisible?: boolean;
-  className?: string;
+  title: string
+  description: string
+  linkText: string
+  linkUrl: string
+  defaultVisible?: boolean
+  className?: string
 }
 
 const Banner = ({
-  title = "Version 2.0 is now available!",
-  description = "Read the full release notes",
-  linkText = "here",
-  linkUrl = "#",
+  title = 'Version 2.0 is now available!',
+  description = 'Read the full release notes',
+  linkText = 'here',
+  linkUrl = '#',
   defaultVisible = true,
   className,
 }: Banner1Props) => {
-  const [isVisible, setIsVisible] = useState(defaultVisible);
+  const [isVisible, setIsVisible] = useState(defaultVisible)
 
   const handleClose = () => {
-    setIsVisible(false);
-  };
+    setIsVisible(false)
+  }
 
-  if (!isVisible) return null;
+  if (!isVisible) return null
 
   return (
-    <section
-      className={cn("w-full border-b bg-background px-4 py-3", className)}
-      role="banner"
-    >
+    <section className={cn('w-full border-b bg-background px-4 py-3', className)} role="banner">
       <div className="flex items-center justify-between gap-2">
         <div className="flex-1 text-center">
           <span className="text-sm">
-            <span className="font-medium">{title}</span>{" "}
+            <span className="font-medium">{title}</span>{' '}
             <span className="text-muted-foreground">
-              {description}{" "}
+              {description}{' '}
               <a
                 href={linkUrl}
                 className="underline underline-offset-2 hover:text-foreground"
                 target="_blank"
+                rel="noreferrer"
               >
                 {linkText}
               </a>
@@ -62,7 +60,7 @@ const Banner = ({
         </Button>
       </div>
     </section>
-  );
-};
+  )
+}
 
-export { Banner };
+export { Banner }

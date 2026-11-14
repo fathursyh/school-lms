@@ -25,7 +25,16 @@ export class AcademicYearSchema extends BaseModel {
 }
 
 export class AssignmentSchema extends BaseModel {
-  static $columns = ['classSubjectId', 'createdAt', 'dueAt', 'id', 'instructions', 'passingScore', 'title', 'updatedAt'] as const
+  static $columns = [
+    'classSubjectId',
+    'createdAt',
+    'dueAt',
+    'id',
+    'instructions',
+    'passingScore',
+    'title',
+    'updatedAt',
+  ] as const
   $columns = AssignmentSchema.$columns
   @column()
   declare classSubjectId: string
@@ -46,7 +55,15 @@ export class AssignmentSchema extends BaseModel {
 }
 
 export class AttendanceRecordSchema extends BaseModel {
-  static $columns = ['attendanceSessionId', 'createdAt', 'id', 'notes', 'status', 'studentId', 'updatedAt'] as const
+  static $columns = [
+    'attendanceSessionId',
+    'createdAt',
+    'id',
+    'notes',
+    'status',
+    'studentId',
+    'updatedAt',
+  ] as const
   $columns = AttendanceRecordSchema.$columns
   @column()
   declare attendanceSessionId: string
@@ -65,7 +82,17 @@ export class AttendanceRecordSchema extends BaseModel {
 }
 
 export class AttendanceSessionSchema extends BaseModel {
-  static $columns = ['classSubjectId', 'closedAt', 'createdAt', 'date', 'id', 'meetingNumber', 'openAt', 'title', 'updatedAt'] as const
+  static $columns = [
+    'classSubjectId',
+    'closedAt',
+    'createdAt',
+    'date',
+    'id',
+    'meetingNumber',
+    'openAt',
+    'title',
+    'updatedAt',
+  ] as const
   $columns = AttendanceSessionSchema.$columns
   @column()
   declare classSubjectId: string
@@ -120,7 +147,15 @@ export class ClassSubjectSchema extends BaseModel {
 }
 
 export class ClassSchema extends BaseModel {
-  static $columns = ['academicYearId', 'createdAt', 'grade', 'homeroomTeacherId', 'id', 'name', 'updatedAt'] as const
+  static $columns = [
+    'academicYearId',
+    'createdAt',
+    'grade',
+    'homeroomTeacherId',
+    'id',
+    'name',
+    'updatedAt',
+  ] as const
   $columns = ClassSchema.$columns
   @column()
   declare academicYearId: string
@@ -139,7 +174,15 @@ export class ClassSchema extends BaseModel {
 }
 
 export class MaterialSchema extends BaseModel {
-  static $columns = ['classSubjectId', 'createdAt', 'description', 'filePath', 'id', 'title', 'updatedAt'] as const
+  static $columns = [
+    'classSubjectId',
+    'createdAt',
+    'description',
+    'filePath',
+    'id',
+    'title',
+    'updatedAt',
+  ] as const
   $columns = MaterialSchema.$columns
   @column()
   declare classSubjectId: string
@@ -190,7 +233,18 @@ export class SubjectSchema extends BaseModel {
 }
 
 export class SubmissionSchema extends BaseModel {
-  static $columns = ['assignmentId', 'createdAt', 'feedback', 'fileUrl', 'gradedAt', 'id', 'notes', 'score', 'studentId', 'updatedAt'] as const
+  static $columns = [
+    'assignmentId',
+    'createdAt',
+    'feedback',
+    'fileUrl',
+    'gradedAt',
+    'id',
+    'notes',
+    'score',
+    'studentId',
+    'updatedAt',
+  ] as const
   $columns = SubmissionSchema.$columns
   @column()
   declare assignmentId: string
@@ -215,7 +269,16 @@ export class SubmissionSchema extends BaseModel {
 }
 
 export class UserSchema extends BaseModel {
-  static $columns = ['createdAt', 'email', 'id', 'identifier', 'name', 'password', 'role', 'updatedAt'] as const
+  static $columns = [
+    'createdAt',
+    'email',
+    'id',
+    'identifier',
+    'name',
+    'password',
+    'role',
+    'updatedAt',
+  ] as const
   $columns = UserSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime

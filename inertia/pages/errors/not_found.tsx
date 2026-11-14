@@ -1,5 +1,5 @@
-
 export default function NotFound() {
+  const tes = ''
   return (
     <div className="home">
       <article className="prose-card">

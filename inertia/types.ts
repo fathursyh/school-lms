@@ -1,7 +1,7 @@
 import { type Data } from '@generated/data'
 import { type PropsWithChildren } from 'react'
 import { type JSONDataTypes } from '@adonisjs/core/types/transformers'
-import { LinkProps } from '@adonisjs/inertia/react'
+import { type LinkProps } from '@adonisjs/inertia/react'
 export type InertiaProps<T extends JSONDataTypes = {}> = PropsWithChildren<Data.SharedProps & T>
 
 /**

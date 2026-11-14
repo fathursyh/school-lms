@@ -4,7 +4,9 @@ import { buttonVariants } from '~/components/ui/button'
 export default function Home() {
   return (
     <>
-      <Link route='session.create' className={buttonVariants()}>Login</Link>
+      <Link route="session.create" className={buttonVariants()}>
+        Login
+      </Link>
     </>
   )
 }

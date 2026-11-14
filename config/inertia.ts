@@ -13,7 +13,7 @@ const inertiaConfig = defineConfig({
       if (page.startsWith('dashboard/') || page.startsWith('admin/')) {
         return false
       }
-      return true;
+      return true
     },
 
     /**

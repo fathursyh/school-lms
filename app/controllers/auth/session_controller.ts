@@ -15,7 +15,6 @@ export default class SessionController {
     await auth.use('web').login(user, rememberMe)
 
     session.flash(FlashEnum.SUCCESS, `Welcome back, ${user.name}!`)
-
     switch (user.role) {
       case 'ADMIN':
         return response.redirect().toRoute('administrators.overview')

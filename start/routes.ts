@@ -10,6 +10,7 @@ import AdminAcademicYearsRoutes from './routes/academic_year/admin_academic_year
 import AdminSubjectsRoutes from './routes/subjects/admin_subjects_routes.ts'
 
 router.on('/').renderInertia('home', {}).as('home')
+
 AuthRoutes()
 
 router.group(() => {

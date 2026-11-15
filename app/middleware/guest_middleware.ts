@@ -23,6 +23,11 @@ export default class GuestMiddleware {
     for (let guard of options.guards || [ctx.auth.defaultGuard]) {
       if (await ctx.auth.use(guard).check()) {
         ctx.session.reflash()
+        switch (ctx.auth.user?.role) {
+          case 'STUDENT': return ctx.response.redirect().toRoute('students.overview')
+          case 'TEACHER': return ctx.response.redirect().toRoute('teachers.overview')
+          case 'ADMIN': return ctx.response.redirect().toRoute('administrators.overview')
+        }
         return ctx.response.redirect(this.redirectTo, true)
       }
     }

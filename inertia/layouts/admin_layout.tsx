@@ -1,7 +1,6 @@
 import React, { type ReactNode } from 'react'
 import { AppSidebar, type NavMenuGroup } from '~/components/app-sidebar'
 import FlashToasts from '~/components/shared/flash_toasts'
-import { Breadcrumb, BreadcrumbItem, BreadcrumbLink, BreadcrumbList, BreadcrumbPage, BreadcrumbSeparator } from '~/components/ui/breadcrumb'
 import { Separator } from '~/components/ui/separator'
 import { SidebarInset, SidebarProvider, SidebarTrigger } from '~/components/ui/sidebar'
 import {
@@ -19,6 +18,7 @@ import {
 } from "lucide-react"
 import { usePage } from '@inertiajs/react'
 import { getActiveState } from '~/lib/utils'
+import PageBreadcrumbs from '~/components/shared/page_breadcrumbs'
 
 export default function AdminLayout({ children }: { children: ReactNode }) {
   const { url } = usePage()
@@ -150,19 +150,7 @@ export default function AdminLayout({ children }: { children: ReactNode }) {
                 orientation="vertical"
                 className="mr-2 data-[orientation=vertical]:h-4"
               />
-              <Breadcrumb>
-                <BreadcrumbList>
-                  <BreadcrumbItem className="hidden md:block">
-                    <BreadcrumbLink href="#">
-                      Build Your Application
-                    </BreadcrumbLink>
-                  </BreadcrumbItem>
-                  <BreadcrumbSeparator className="hidden md:block" />
-                  <BreadcrumbItem>
-                    <BreadcrumbPage>Data Fetching</BreadcrumbPage>
-                  </BreadcrumbItem>
-                </BreadcrumbList>
-              </Breadcrumb>
+              <PageBreadcrumbs url={url} menus={menus} />
             </div>
           </header>
           <div className="flex flex-1 flex-col gap-4 p-4 pt-0">

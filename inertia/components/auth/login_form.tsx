@@ -15,7 +15,7 @@ export function LoginForm() {
         <CardDescription>Enter your email below to login to your account</CardDescription>
       </CardHeader>
       <CardContent>
-        <Form route="session.store" noValidate>
+        <Form route="session.store" options={{ replace: true }} noValidate>
           {({ errors, processing }) => (
             <FieldGroup>
               <Field>

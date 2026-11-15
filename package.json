@@ -20,6 +20,7 @@
   "imports": {
     "#controllers/*": "./app/controllers/*.js",
     "#exceptions/*": "./app/exceptions/*.js",
+    "#enums/*": "./app/enums/*.js",
     "#models/*": "./app/models/*.js",
     "#mails/*": "./app/mails/*.js",
     "#services/*": "./app/services/*.js",
@@ -111,6 +112,7 @@
     "sonner": "^2.0.8",
     "tailwind-merge": "^3.7.0",
     "tailwindcss": "^4.3.5",
+    "ulid": "^3.0.2",
     "vaul": "^1.1.2",
     "zod": "^4.6.7"
   },

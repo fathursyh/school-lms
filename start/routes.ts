@@ -41,5 +41,5 @@ router.group(() => {
 })
   .prefix('administrators')
   .as('administrators')
-  // .use(middleware.auth())
-  // .use(middleware.role(['ADMIN']))
+  .use(middleware.auth())
+  .use(middleware.role(['ADMIN']))

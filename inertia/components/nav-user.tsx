@@ -1,5 +1,3 @@
-"use client"
-
 import {
   BadgeCheck,
   Bell,
@@ -29,6 +27,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from "inertia/components/ui/sidebar"
+import { router } from "@inertiajs/react"
 
 export function NavUser({
   user,
@@ -40,6 +39,10 @@ export function NavUser({
   }
 }) {
   const { isMobile } = useSidebar()
+
+  function logout() {
+    router.post('/logout', {}, { replace: true })
+  }
 
   return (
     <SidebarMenu>
@@ -102,7 +105,7 @@ export function NavUser({
               </DropdownMenuItem>
             </DropdownMenuGroup>
             <DropdownMenuSeparator />
-            <DropdownMenuItem>
+            <DropdownMenuItem onClick={logout}>
               <LogOut />
               Log out
             </DropdownMenuItem>

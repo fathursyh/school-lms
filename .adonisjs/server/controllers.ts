@@ -17,8 +17,8 @@ export const controllers = {
     PublicExtracurriculars: () => import('#controllers/extracurricular/public_extracurriculars_controller'),
   },
   StudentsGeneral: () => import('#controllers/students_general_controller'),
-  TeachersGeneral: () => import('#controllers/teachers_general_controller'),
   subjects: {
     AdminSubjects: () => import('#controllers/subjects/admin_subjects_controller'),
   },
+  TeachersGeneral: () => import('#controllers/teachers_general_controller'),
 }

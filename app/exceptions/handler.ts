@@ -1,6 +1,8 @@
 import app from '@adonisjs/core/services/app'
 import { type HttpContext, ExceptionHandler } from '@adonisjs/core/http'
 import type { StatusPageRange, StatusPageRenderer } from '@adonisjs/core/types/http'
+import { Exception } from '@adonisjs/core/exceptions'
+import { FlashEnum } from '#enums/flash_enum'
 
 export default class HttpExceptionHandler extends ExceptionHandler {
   /**
@@ -30,7 +32,20 @@ export default class HttpExceptionHandler extends ExceptionHandler {
    * response to the client
    */
   async handle(error: unknown, ctx: HttpContext) {
-    return super.handle(error, ctx)
+    const exception = error as Exception
+    if (exception.status === 422) {
+      return super.handle(error, ctx)
+    }
+    if (exception.code === 'ER_DUP_ENTRY') {
+      ctx.session?.flash(FlashEnum.ERROR, '409: You have duplicate entry.')
+      return ctx.response.redirect().back()
+    }
+    if (exception.status !== 500) {
+      ctx.session?.flash(FlashEnum.ERROR, `${exception.status}: ${exception.message}.`)
+      return ctx.response.redirect().back()
+    }
+    ctx.session?.flash(FlashEnum.ERROR, `500: ${exception.message}.`)
+    return ctx.response.redirect().back()
   }
 
   /**

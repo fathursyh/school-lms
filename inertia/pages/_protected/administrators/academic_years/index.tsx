@@ -1,12 +1,21 @@
-import { Form } from '@adonisjs/inertia/react'
 import { type Data } from '@generated/data'
-import { Head } from '@inertiajs/react'
+import { Head, router } from '@inertiajs/react'
 import { type Column, type ColumnDef } from '@tanstack/react-table'
-import { ArrowDown, ArrowUp, ArrowUpDown, Plus } from 'lucide-react'
+import {
+  ArrowDown,
+  ArrowUp,
+  ArrowUpDown,
+  CheckCircle2,
+  MoreHorizontal,
+  Pencil,
+  Trash2,
+} from 'lucide-react'
 import React from 'react'
+import { urlFor } from '~/client'
+import AcademicYearForm from '~/components/academic_year/academic_year_form'
 import { DataTable } from '~/components/shared/data_table'
 import { Badge } from '~/components/ui/badge'
-import { Button, buttonVariants } from '~/components/ui/button'
+import { Button } from '~/components/ui/button'
 import {
   Dialog,
   DialogClose,
@@ -15,11 +24,13 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '~/components/ui/dialog'
-import { FieldGroup, Field, FieldLabel, FieldError } from '~/components/ui/field'
-import { Input } from '~/components/ui/input'
-import { RadioGroup, RadioGroupItem } from '~/components/ui/radio-group'
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from '~/components/ui/dropdown-menu'
 import {
   Select,
   SelectContent,
@@ -28,6 +39,7 @@ import {
   SelectValue,
 } from '~/components/ui/select'
 import AdminLayout from '~/layouts/admin_layout'
+import { cn } from '~/lib/utils'
 
 interface AdminAcademicYearsPageProps {
   academicYears: Data.AcademicYear[]
@@ -41,6 +53,11 @@ export default function AdminAcademicYearsIndexPage({
 }: AdminAcademicYearsPageProps) {
   const [semesterFilter, setSemesterFilter] = React.useState<SemesterFilter>('ALL')
   const [statusFilter, setStatusFilter] = React.useState<StatusFilter>('ALL')
+  const [editingAcademicYear, setEditingAcademicYear] =
+    React.useState<Data.AcademicYear | null>(null)
+  const [deletingAcademicYear, setDeletingAcademicYear] =
+    React.useState<Data.AcademicYear | null>(null)
+  const [isDeleting, setIsDeleting] = React.useState(false)
 
   const filteredAcademicYears = React.useMemo(() => {
     return academicYears.filter((item) => {
@@ -56,6 +73,72 @@ export default function AdminAcademicYearsIndexPage({
       return true
     })
   }, [academicYears, semesterFilter, statusFilter])
+
+  const columns = React.useMemo<ColumnDef<Data.AcademicYear>[]>(
+    () => [
+      {
+        id: 'rowNumber',
+        header: 'No',
+        cell: ({ row }) => row.index + 1,
+      },
+      {
+        accessorKey: 'year',
+        header: ({ column }) => <SortableHeader column={column} label="Year" />,
+      },
+      { accessorKey: 'semester', header: 'Semester', cell: ({row}) => {
+        const style = row.original.semester === 'ODD' ? 'bg-orange-500 hover:bg-orange-600'
+         : 'bg-blue-500 hover:bg-blue-600'
+        return (
+        <Badge className={cn(
+          'capitalize',
+          style
+        )}>{row.original.semester.toLowerCase()}</Badge>
+      )
+      } },
+      {
+        accessorKey: 'isActive',
+        header: ({ column }) => <SortableHeader column={column} label="Status" />,
+        cell: ({ row }) => (
+          <Badge variant={row.original.isActive ? 'default' : 'secondary'}>
+            {row.original.isActive ? 'Active' : 'Inactive'}
+          </Badge>
+        ),
+      },
+      {
+        id: 'actions',
+        header: 'Actions',
+        cell: ({ row }) => (
+          <ActionMenu
+            isActive={row.original.isActive}
+            onActivate={() =>
+              router.patch(
+                urlFor('administrators.academic_years.activate', { id: row.original.id }),
+                {},
+                { only: ['academicYears'] }
+              )
+            }
+            onEdit={() => setEditingAcademicYear(row.original)}
+            onDelete={() => setDeletingAcademicYear(row.original)}
+          />
+        ),
+      },
+    ],
+    []
+  )
+
+  function handleDeleteConfirm() {
+    if (!deletingAcademicYear) return
+
+    setIsDeleting(true)
+    router.delete(
+      urlFor('administrators.academic_years.destroy', { id: deletingAcademicYear.id }),
+      {
+        only: ['academicYears'],
+        onSuccess: () => setDeletingAcademicYear(null),
+        onFinish: () => setIsDeleting(false),
+      }
+    )
+  }
 
   return (
     <>
@@ -102,6 +185,48 @@ export default function AdminAcademicYearsIndexPage({
           }
         />
       </div>
+
+      <AcademicYearForm
+        academicYear={editingAcademicYear}
+        open={!!editingAcademicYear}
+        onOpenChange={(open) => {
+          if (!open) setEditingAcademicYear(null)
+        }}
+      />
+
+      <Dialog
+        open={!!deletingAcademicYear}
+        onOpenChange={(open) => {
+          if (!open && !isDeleting) setDeletingAcademicYear(null)
+        }}
+      >
+        <DialogContent className="sm:max-w-sm">
+          <DialogHeader>
+            <DialogTitle>Delete Academic Year</DialogTitle>
+            <DialogDescription>
+              Are you sure you want to delete{' '}
+              <span className="font-medium text-foreground">
+                {deletingAcademicYear?.year} ({deletingAcademicYear?.semester})
+              </span>
+              ? This action cannot be undone.
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="mt-4">
+            <DialogClose asChild>
+              <Button variant="ghost" disabled={isDeleting}>
+                Cancel
+              </Button>
+            </DialogClose>
+            <Button
+              variant="destructive"
+              disabled={isDeleting}
+              onClick={handleDeleteConfirm}
+            >
+              {isDeleting ? 'Deleting...' : 'Delete'}
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </>
   )
 }
@@ -136,98 +261,43 @@ function SortableHeader({
   )
 }
 
-const columns: ColumnDef<Data.AcademicYear>[] = [
-  {
-    id: 'rowNumber',
-    header: 'No',
-    cell: ({ row }) => row.index + 1,
-  },
-  {
-    accessorKey: 'year',
-    header: ({ column }) => <SortableHeader column={column} label="Year" />,
-  },
-  { accessorKey: 'semester', header: 'Semester' },
-  {
-    accessorKey: 'isActive',
-    header: ({ column }) => <SortableHeader column={column} label="Status" />,
-    cell: ({ row }) => (
-      <Badge variant={row.original.isActive ? 'default' : 'secondary'}>
-        {row.original.isActive ? 'Active' : 'Inactive'}
-      </Badge>
-    ),
-  },
-]
-
-const currentYear = new Date().getFullYear()
-
-function AcademicYearForm() {
-  const [open, setOpen] = React.useState(false)
+function ActionMenu({
+  isActive,
+  onActivate,
+  onEdit,
+  onDelete,
+}: {
+  isActive: boolean
+  onActivate: () => void
+  onEdit: () => void
+  onDelete: () => void
+}) {
   return (
-    <Dialog open={open} onOpenChange={setOpen}>
-      <DialogTrigger className={buttonVariants()}>
-        <Plus />
-        Create New Year
-      </DialogTrigger>
-      <DialogContent className="sm:max-w-sm">
-        <Form
-          route="administrators.academic_years.store"
-          onSuccess={() => setOpen(false)}
-          noValidate
-          options={{ only: ['academicYears'] }}
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button size="icon" variant="ghost">
+          <MoreHorizontal />
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent align="end">
+        {!isActive && (
+          <DropdownMenuItem onClick={onActivate}>
+            <CheckCircle2 />
+            Set as Active
+          </DropdownMenuItem>
+        )}
+        <DropdownMenuItem onClick={onEdit}>
+          <Pencil />
+          Edit
+        </DropdownMenuItem>
+        <DropdownMenuItem
+          className="text-destructive focus:text-destructive"
+          onClick={onDelete}
         >
-          {({ errors, processing }) => (
-            <>
-              <DialogHeader>
-                <DialogTitle>Create New Academic Year</DialogTitle>
-                <DialogDescription>
-                  Make a new academic year here. Click save when you&apos;re done.
-                </DialogDescription>
-              </DialogHeader>
-              <FieldGroup className="my-4">
-                <Field>
-                  <FieldLabel htmlFor="year">Year</FieldLabel>
-                  <Input
-                    id="year"
-                    type="number"
-                    min={2000}
-                    max={2100}
-                    name="year"
-                    defaultValue={currentYear}
-                  />
-                  {errors.year && <FieldError>{errors.year}</FieldError>}
-                </Field>
-                <Field>
-                  <FieldLabel htmlFor="semester">Semester</FieldLabel>
-                  <RadioGroup
-                    id="semester"
-                    name="semester"
-                    defaultValue="ODD"
-                    className="w-fit flex gap-4"
-                  >
-                    <div className="flex items-center gap-3">
-                      <RadioGroupItem value="ODD" id="odd" />
-                      <FieldLabel htmlFor="odd">Odd</FieldLabel>
-                    </div>
-                    <div className="flex items-center gap-3">
-                      <RadioGroupItem value="EVEN" id="even" />
-                      <FieldLabel htmlFor="even">Even</FieldLabel>
-                    </div>
-                  </RadioGroup>
-                  {errors.semester && <FieldError>{errors.semester}</FieldError>}
-                </Field>
-              </FieldGroup>
-              <DialogFooter className="mt-8">
-                <DialogClose className={buttonVariants({ variant: 'ghost' })}>
-                  Cancel
-                </DialogClose>
-                <Button type="submit" disabled={processing}>
-                  Save changes
-                </Button>
-              </DialogFooter>
-            </>
-          )}
-        </Form>
-      </DialogContent>
-    </Dialog>
+          <Trash2 />
+          Delete
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   )
 }

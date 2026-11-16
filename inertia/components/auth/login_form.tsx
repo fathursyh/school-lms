@@ -16,22 +16,23 @@ export function LoginForm() {
       </CardHeader>
       <CardContent>
         <Form route="session.store" options={{ replace: true }} noValidate>
-          {({ errors, processing }) => (
+          {({ errors, processing, setError}) => (
             <FieldGroup>
-              <Field>
+              <Field data-invalid={!!errors.email}>
                 <FieldLabel htmlFor="email">Email</FieldLabel>
                 <Input
                   id="email"
                   name="email"
                   type="email"
                   placeholder="email@school.edu.com"
-                  required
                   disabled={processing}
+                  aria-invalid={!!errors.email}
                   autoFocus
+                  onChange={() => setError('email', '')}
                 />
                 {errors.email && <FieldError>{errors.email}</FieldError>}
               </Field>
-              <Field>
+              <Field data-invalid={!!errors.password}>
                 <div className="flex items-center">
                   <FieldLabel htmlFor="password">Password</FieldLabel>
                   <a
@@ -45,8 +46,9 @@ export function LoginForm() {
                   id="password"
                   type="password"
                   name="password"
-                  required
+                  aria-invalid={!!errors.password}
                   disabled={processing}
+                  onChange={() => setError('password', '')}
                 />
                 {errors.password && <FieldError>{errors.password}</FieldError>}
               </Field>

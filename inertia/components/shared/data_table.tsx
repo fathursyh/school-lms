@@ -243,6 +243,7 @@ export function DataTable<TData, TValue = unknown>({
               <Search className="pointer-events-none absolute top-1/2 left-3 size-4 -translate-y-1/2 text-muted-foreground" />
               <Input
                 value={searchValue}
+                type="search"
                 onChange={(e) => handleSearchChange(e.target.value)}
                 placeholder={searchConfig?.placeholder ?? "Search..."}
                 className="pl-9"

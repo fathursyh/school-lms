@@ -8,7 +8,7 @@ export default class extends BaseSeeder {
       identifier: 'ADMIN-001-START',
       email: env.get('ROOT_EMAIL'),
       name: 'Administrator',
-      role: 'ADMIN',
+      role: 'ADMIN' as User['role'],
       password: env.get('ROOT_PASSWORD'),
     }
 
@@ -16,7 +16,7 @@ export default class extends BaseSeeder {
       identifier: 'teacher-123',
       email: 'teacher@gmail.com',
       name: 'Teacher Example',
-      role: 'TEACHER',
+      role: 'TEACHER' as User['role'],
       password: 'password',
     }
 
@@ -24,7 +24,7 @@ export default class extends BaseSeeder {
       identifier: 'student-123',
       email: 'student@gmail.com',
       name: 'Student Example',
-      role: 'STUDENT',
+      role: 'STUDENT' as User['role'],
       password: 'password',
     }
 

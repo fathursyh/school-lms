@@ -16,25 +16,35 @@ export default class AdminSubjectsController {
   /**
    * Handle form submission for the create action
    */
-  async store({ request }: HttpContext) { }
+  async store({ request }: HttpContext) {
+    console.log(request)
+  }
 
   /**
    * Show individual record
    */
-  async show({ params }: HttpContext) { }
+  async show({ params }: HttpContext) {
+    console.log(params)
+  }
 
   /**
    * Edit individual record
    */
-  async edit({ params }: HttpContext) { }
+  async edit({ params }: HttpContext) {
+    console.log(params)
+  }
 
   /**
    * Handle form submission for the edit action
    */
-  async update({ params }: HttpContext) { }
+  async update({ params }: HttpContext) {
+    console.log(params)
+  }
 
   /**
    * Delete record
    */
-  async destroy({ params }: HttpContext) { }
+  async destroy({ params }: HttpContext) {
+    console.log(params)
+  }
 }

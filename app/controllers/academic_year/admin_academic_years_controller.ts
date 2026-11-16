@@ -1,5 +1,7 @@
+import { FlashEnum } from '#enums/flash_enum';
 import AcademicYear from '#models/academic_year'
 import AcademicYearTransformer from '#transformers/academic_year_transformer'
+import { createAcademicYearSchema } from '#validators/academic_year_validator';
 import type { HttpContext } from '@adonisjs/core/http'
 
 export default class AdminAcademicYearsController {
@@ -21,7 +23,15 @@ export default class AdminAcademicYearsController {
   /**
    * Handle form submission for the create action
    */
-  async store({}: HttpContext) { }
+  async store({request, response, session}: HttpContext) {
+
+    const academicYear = await request.validateUsing(createAcademicYearSchema)
+
+    await AcademicYear.create(academicYear)
+
+    session.flash(FlashEnum.SUCCESS, 'Academic year has been successfully created.')
+    return response.redirect().back()
+  }
 
   /**
    * Show individual record

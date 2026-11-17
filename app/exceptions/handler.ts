@@ -37,7 +37,7 @@ export default class HttpExceptionHandler extends ExceptionHandler {
       return super.handle(error, ctx)
     }
     if (exception.code === 'ER_DUP_ENTRY') {
-      ctx.session?.flash(FlashEnum.ERROR, '409: You have duplicate entry.')
+      ctx.session?.flash(FlashEnum.ERROR, '409: You have a duplicate entry.')
       return ctx.response.redirect().back()
     }
     if (exception.status !== 500) {

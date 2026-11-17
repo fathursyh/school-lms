@@ -27,6 +27,17 @@ export default class AdminAcademicYearsController {
   async store({ request, response, session }: HttpContext) {
     const academicYear = await request.validateUsing(createAcademicYearSchema)
 
+    const trashed = await AcademicYear.onlyTrashed()
+      .where('year', academicYear.year)
+      .where('semester', academicYear.semester)
+      .first()
+
+    if (trashed) {
+      trashed.isActive = false
+      await trashed.restore()
+      session.flash(FlashEnum.SUCCESS, 'Academic year has been restored.')
+      return response.redirect().back()
+    }
     await AcademicYear.create(academicYear)
 
     session.flash(FlashEnum.SUCCESS, 'Academic year has been successfully created.')

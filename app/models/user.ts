@@ -1,4 +1,5 @@
 import { UserSchema } from '#database/schema'
+import { SoftDeletes } from '@codenameryuu/adonis-lucid-soft-deletes'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
@@ -7,7 +8,7 @@ import { beforeCreate, column } from '@adonisjs/lucid/orm'
 import { ulid } from 'ulid'
 import type { UserRole } from '#database/migrations/1761885935168_create_users_table'
 
-export default class User extends compose(UserSchema, withAuthFinder(hash)) {
+export default class User extends compose(UserSchema, withAuthFinder(hash), SoftDeletes) {
   static selfAssignPrimaryKey = true
   static rememberMeTokens = DbRememberMeTokensProvider.forModel(User)
 

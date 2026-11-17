@@ -8,10 +8,12 @@ import { BaseModel, column } from '@adonisjs/lucid/orm'
 import { DateTime } from 'luxon'
 
 export class AcademicYearSchema extends BaseModel {
-  static $columns = ['createdAt', 'id', 'isActive', 'semester', 'updatedAt', 'year'] as const
+  static $columns = ['createdAt', 'deletedAt', 'id', 'isActive', 'semester', 'updatedAt', 'year'] as const
   $columns = AcademicYearSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
+  @column.dateTime()
+  declare deletedAt: DateTime | null
   @column({ isPrimary: true })
   declare id: string
   @column()
@@ -25,12 +27,14 @@ export class AcademicYearSchema extends BaseModel {
 }
 
 export class AssignmentSchema extends BaseModel {
-  static $columns = ['classSubjectId', 'createdAt', 'dueAt', 'id', 'instructions', 'passingScore', 'title', 'updatedAt'] as const
+  static $columns = ['classSubjectId', 'createdAt', 'deletedAt', 'dueAt', 'id', 'instructions', 'passingScore', 'title', 'updatedAt'] as const
   $columns = AssignmentSchema.$columns
   @column()
   declare classSubjectId: string
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
+  @column.dateTime()
+  declare deletedAt: DateTime | null
   @column.dateTime()
   declare dueAt: DateTime | null
   @column({ isPrimary: true })
@@ -65,7 +69,7 @@ export class AttendanceRecordSchema extends BaseModel {
 }
 
 export class AttendanceSessionSchema extends BaseModel {
-  static $columns = ['classSubjectId', 'closedAt', 'createdAt', 'date', 'id', 'meetingNumber', 'openAt', 'title', 'updatedAt'] as const
+  static $columns = ['classSubjectId', 'closedAt', 'createdAt', 'date', 'deletedAt', 'id', 'meetingNumber', 'openAt', 'title', 'updatedAt'] as const
   $columns = AttendanceSessionSchema.$columns
   @column()
   declare classSubjectId: string
@@ -75,6 +79,8 @@ export class AttendanceSessionSchema extends BaseModel {
   declare createdAt: DateTime
   @column.date()
   declare date: DateTime
+  @column.dateTime()
+  declare deletedAt: DateTime | null
   @column({ isPrimary: true })
   declare id: string
   @column()
@@ -103,12 +109,14 @@ export class ClassStudentSchema extends BaseModel {
 }
 
 export class ClassSubjectSchema extends BaseModel {
-  static $columns = ['classId', 'createdAt', 'id', 'subjectId', 'teacherId', 'updatedAt'] as const
+  static $columns = ['classId', 'createdAt', 'deletedAt', 'id', 'subjectId', 'teacherId', 'updatedAt'] as const
   $columns = ClassSubjectSchema.$columns
   @column()
   declare classId: string
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
+  @column.dateTime()
+  declare deletedAt: DateTime | null
   @column({ isPrimary: true })
   declare id: string
   @column()
@@ -120,12 +128,14 @@ export class ClassSubjectSchema extends BaseModel {
 }
 
 export class ClassSchema extends BaseModel {
-  static $columns = ['academicYearId', 'createdAt', 'grade', 'homeroomTeacherId', 'id', 'name', 'updatedAt'] as const
+  static $columns = ['academicYearId', 'createdAt', 'deletedAt', 'grade', 'homeroomTeacherId', 'id', 'name', 'updatedAt'] as const
   $columns = ClassSchema.$columns
   @column()
   declare academicYearId: string
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
+  @column.dateTime()
+  declare deletedAt: DateTime | null
   @column()
   declare grade: number
   @column()
@@ -175,12 +185,14 @@ export class RememberMeTokenSchema extends BaseModel {
 }
 
 export class SubjectSchema extends BaseModel {
-  static $columns = ['code', 'createdAt', 'id', 'name', 'updatedAt'] as const
+  static $columns = ['code', 'createdAt', 'deletedAt', 'id', 'name', 'updatedAt'] as const
   $columns = SubjectSchema.$columns
   @column()
   declare code: string
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
+  @column.dateTime()
+  declare deletedAt: DateTime | null
   @column({ isPrimary: true })
   declare id: string
   @column()
@@ -215,10 +227,12 @@ export class SubmissionSchema extends BaseModel {
 }
 
 export class UserSchema extends BaseModel {
-  static $columns = ['createdAt', 'email', 'id', 'identifier', 'name', 'password', 'role', 'updatedAt'] as const
+  static $columns = ['createdAt', 'deletedAt', 'email', 'id', 'identifier', 'name', 'password', 'role', 'updatedAt'] as const
   $columns = UserSchema.$columns
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
+  @column.dateTime()
+  declare deletedAt: DateTime | null
   @column()
   declare email: string
   @column({ isPrimary: true })

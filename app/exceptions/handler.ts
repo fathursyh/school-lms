@@ -32,19 +32,44 @@ export default class HttpExceptionHandler extends ExceptionHandler {
    * response to the client
    */
   async handle(error: unknown, ctx: HttpContext) {
-    const exception = error as Exception
-    if (exception.status === 422) {
+    const exception = error as Exception & { status?: number; code?: string }
+    const status = exception.status ?? 500
+
+    if (status === 422 || exception.code === 'E_UNAUTHORIZED_ACCESS') {
       return super.handle(error, ctx)
     }
-    if (exception.code === 'ER_DUP_ENTRY') {
-      ctx.session?.flash(FlashEnum.ERROR, '409: You have a duplicate entry.')
+
+    if (exception.code === 'ER_DUP_ENTRY' || exception.code === 'SQLITE_CONSTRAINT_UNIQUE') {
+      ctx.session?.flash(FlashEnum.ERROR, 'This record already exists.')
       return ctx.response.redirect().back()
     }
-    if (exception.status !== 500) {
-      ctx.session?.flash(FlashEnum.ERROR, `${exception.status}: ${exception.message}.`)
+
+    if (
+      exception.code === 'ER_ROW_IS_REFERENCED_2' ||
+      exception.code === 'SQLITE_CONSTRAINT_FOREIGNKEY'
+    ) {
+      ctx.session?.flash(
+        FlashEnum.ERROR,
+        'Cannot delete this record because it is still referenced by other data.'
+      )
       return ctx.response.redirect().back()
     }
-    ctx.session?.flash(FlashEnum.ERROR, `500: ${exception.message}.`)
+
+    if (exception.code === 'E_BAD_CSRF_TOKEN') {
+      ctx.session?.flash(FlashEnum.ERROR, 'Session expired. Please refresh and try again.')
+      return ctx.response.redirect().back()
+    }
+
+    if (ctx.request.method() === 'GET') {
+      return super.handle(error, ctx)
+    }
+
+    const safeMessage =
+      status >= 500 && app.inProduction
+        ? 'Something went wrong. Please try again later.'
+        : exception.message || 'Request failed.'
+
+    ctx.session?.flash(FlashEnum.ERROR, safeMessage)
     return ctx.response.redirect().back()
   }
 

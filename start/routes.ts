@@ -8,16 +8,20 @@ import TeachersGeneralRoutes from './routes/teachers_general_routes.ts'
 import AdminGeneralRoutes from './routes/admin_general_routes.ts'
 import AdminAcademicYearsRoutes from './routes/academic_year/admin_academic_year_routes.ts'
 import AdminSubjectsRoutes from './routes/subjects/admin_subjects_routes.ts'
+import AdminUsersRoutes from './routes/users/admin_users_routes.ts'
 
 router.on('/').renderInertia('home', {}).as('home')
 
+// AUTH
 AuthRoutes()
 
+// PUBLIC
 router.group(() => {
   PublicExtracurricularsRoutes()
 })
   .as('public')
 
+// STUDENTS
 router.group(() => {
   StudentsGeneralRoutes()
 })
@@ -26,6 +30,7 @@ router.group(() => {
   .use(middleware.auth())
   .use(middleware.role(['STUDENT']))
 
+// TEACHER
 router.group(() => {
   TeachersGeneralRoutes()
 })
@@ -34,8 +39,10 @@ router.group(() => {
   .use(middleware.auth())
   .use(middleware.role(['TEACHER']))
 
+// ADMIN
 router.group(() => {
   AdminGeneralRoutes()
+  AdminUsersRoutes()
   AdminAcademicYearsRoutes()
   AdminSubjectsRoutes()
   AdminExtracurricularsRoutes()

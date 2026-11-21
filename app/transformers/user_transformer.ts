@@ -5,8 +5,10 @@ export default class UserTransformer extends BaseTransformer<User> {
   toObject() {
     return this.pick(this.resource, [
       'id',
+      'identifier',
       'name',
       'email',
+      'role',
       'createdAt',
       'updatedAt',
       'initials',

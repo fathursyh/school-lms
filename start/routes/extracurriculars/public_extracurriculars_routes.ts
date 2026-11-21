@@ -3,7 +3,7 @@ import router from "@adonisjs/core/services/router"
 
 export default function PublicExtracurricularsRoutes() {
   return router.group(() => {
-   router.resource('extracurriculars', controllers.extracurricular.PublicExtracurriculars)
+   router.resource('extracurriculars', controllers.extracurriculars.PublicExtracurriculars)
    .only(['index'])
   })
 }

@@ -7,6 +7,7 @@ import {
   Calendar,
   FlaskConical,
   GraduationCap,
+  LogIn,
   Music,
   Newspaper,
   Trophy,
@@ -101,7 +102,10 @@ export default function Home() {
 
             <div className="flex items-center gap-2">
               <Button asChild size="sm">
-                <Link route="session.create">LMS Login</Link>
+                <Link route="session.create">
+                  <LogIn />
+                  LMS Login
+                </Link>
               </Button>
             </div>
           </div>

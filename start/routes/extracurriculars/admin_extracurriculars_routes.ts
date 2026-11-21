@@ -4,6 +4,6 @@ import router from "@adonisjs/core/services/router";
 
 export default function AdminExtracurricularsRoutes() {
   return router.group(() => {
-    router.resource('extracurriculars', controllers.extracurricular.AdminExtracurriculars)
+    router.resource('extracurriculars', controllers.extracurriculars.AdminExtracurriculars)
   })
 }
